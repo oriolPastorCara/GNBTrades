@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GNB Trades</string>
+
+    <string name="select_product_transactions">Select product</string>
+    <string name="connetion_error">Check your internet connection</string>
+    <string name="generic_error">An Error has occurred</string>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/productsFragment">
+
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.oriolpastor.gnbtrades.feature.products.ui.ProductsFragment"
+        tools:layout="@layout/products_fragment">
+
+        <action
+            android:id="@+id/navigate_from_products_to_transaction_detail"
+            app:destination="@id/transactionDetailFragment">
+            <argument
+                android:name="productId"
+                app:argType="string" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/transactionDetailFragment"
+        android:name="com.oriolpastor.gnbtrades.feature.productTransactions.ui.TransactionDetailFragment"
+        tools:layout="@layout/transaction_detail_fragment"/>
+</navigation>
