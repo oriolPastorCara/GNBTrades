@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/product_detail_product_selected_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="u4543"
+            style="@style/TitleText"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <View
+            android:id="@+id/product_detail_title_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey"
+            android:layout_marginHorizontal="@dimen/generic_horizontal_padding"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_product_selected_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/product_detail_transaction_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingHorizontal="@dimen/generic_horizontal_padding"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_title_divider"
+            app:layout_constraintBottom_toTopOf="@id/product_detail_total_amount_divider"
+            tools:listitem="@layout/transaction_item_list"
+            />
+
+            <View
+                android:id="@+id/product_detail_total_amount_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_grey"
+                android:layout_marginHorizontal="@dimen/generic_horizontal_padding"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

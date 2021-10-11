@@ -17,7 +17,7 @@ class ProductsListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(title: String) {
-            binding.transactionsListItemTitle.text = title
+            binding.productListItemTitle.text = title
             binding.root.setOnClickListener {
                 onUserClick(title)
             }
@@ -35,9 +35,8 @@ class ProductsListAdapter(
         return ViewHolder(transactionItemBinding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         holder.bind(transactionsList[position])
-    }
 
     override fun getItemCount() = transactionsList.size
 

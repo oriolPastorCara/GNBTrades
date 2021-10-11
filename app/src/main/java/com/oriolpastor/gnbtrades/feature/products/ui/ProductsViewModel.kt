@@ -2,24 +2,39 @@ package com.oriolpastor.gnbtrades.feature.products.ui
 
 import androidx.lifecycle.*
 import com.oriolpastor.gnbtrades.base.ui.navigation.Navigator
+import com.oriolpastor.gnbtrades.common.local.entities.Product
+import com.oriolpastor.gnbtrades.common.local.entities.Rate
 import com.oriolpastor.gnbtrades.common.onError
 import com.oriolpastor.gnbtrades.common.onSuccess
-import com.oriolpastor.gnbtrades.feature.splashScreen.domain.GetRatesUseCase
-import com.oriolpastor.gnbtrades.feature.splashScreen.domain.GetTransactionsUseCase
-import com.oriolpastor.gnbtrades.feature.splashScreen.domain.TransactionData
+import com.oriolpastor.gnbtrades.feature.products.domain.local.SaveProductsUseCase
+import com.oriolpastor.gnbtrades.feature.products.domain.local.SaveRatesUseCase
+import com.oriolpastor.gnbtrades.feature.products.domain.remote.GetRatesUseCase
+import com.oriolpastor.gnbtrades.feature.products.domain.remote.GetProductsTransactionsUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ProductsViewModel(
     private val navigator: Navigator,
     private val getRatesUseCase: GetRatesUseCase,
-    private val getTransactionsUseCase: GetTransactionsUseCase,
+    private val getProductsTransactionsUseCase: GetProductsTransactionsUseCase,
+    private val saveProductsUseCase: SaveProductsUseCase,
+    private val saveRatesUseCase: SaveRatesUseCase,
 ) : ViewModel() {
 
-    private val _transactionsList = MutableLiveData<Map<String, List<TransactionData>>>()
-    val transactionsList: LiveData<List<String>> =
-        _transactionsList.map { value -> value.toList().map { it.first } }
+    private val _productsList = MutableLiveData<List<Product>>()
+    val productsList: LiveData<List<String>> =
+        _productsList.map { it.map { data -> data.sku } }
+
+
+    private val _isLoadingProducts = MutableLiveData(true)
+    private val _isLoadingRates = MutableLiveData(true)
+    val isLoading: LiveData<Boolean> = _isLoadingProducts.asFlow().combine(
+        _isLoadingRates.asFlow()
+    ) { products, rates ->
+        return@combine products && rates
+    }.asLiveData()
 
     init {
         getRatesList()
@@ -31,7 +46,10 @@ class ProductsViewModel(
             withContext(Dispatchers.Default) {
                 getRatesUseCase.invoke(Unit)
             }.onSuccess {
+                _isLoadingRates.postValue(false)
+                saveRatesToDB(it)
             }.onError {
+                _isLoadingRates.postValue(false)
             }
         }
     }
@@ -39,11 +57,29 @@ class ProductsViewModel(
     private fun getTransactionsList() {
         viewModelScope.launch {
             withContext(Dispatchers.Default) {
-                getTransactionsUseCase.invoke(Unit)
+                getProductsTransactionsUseCase.invoke(Unit)
             }.onSuccess {
-                _transactionsList.postValue(it)
+                _productsList.postValue(it)
+                _isLoadingProducts.postValue(false)
+                saveProductsToDB(it)
             }.onError {
+                _isLoadingProducts.postValue(false)
+            }
+        }
+    }
 
+    private fun saveProductsToDB(products: List<Product>) {
+        viewModelScope.launch {
+            withContext(Dispatchers.Default) {
+                saveProductsUseCase.invoke(products)
+            }
+        }
+    }
+
+    private fun saveRatesToDB(rates: List<Rate>) {
+        viewModelScope.launch {
+            withContext(Dispatchers.Default) {
+                saveRatesUseCase.invoke(rates)
             }
         }
     }

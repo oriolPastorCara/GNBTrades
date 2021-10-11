@@ -7,7 +7,6 @@ import androidx.navigation.Navigation
 import com.oriolpastor.gnbtrades.R
 import com.oriolpastor.gnbtrades.base.ui.navigation.Navigator
 import com.oriolpastor.gnbtrades.base.ui.navigation.Route
-import com.oriolpastor.gnbtrades.common.livecycle.observe
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
@@ -17,13 +16,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        observe(navigator.directions) { direction ->
+        navigator.directions.observe(this, { direction ->
             when(direction) {
                 is Route.Forward -> navigateTo(direction.direction)
                 else -> navigateBack()
             }
-
-        }
+        })
     }
 
     private fun navigateTo(destination: NavDirections) {

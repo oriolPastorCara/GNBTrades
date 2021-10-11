@@ -1,7 +1,7 @@
 package com.oriolpastor.gnbtrades.common.remote
 
-import com.oriolpastor.gnbtrades.feature.splashScreen.data.models.RateResponse
-import com.oriolpastor.gnbtrades.feature.splashScreen.data.models.TransactionResponse
+import com.oriolpastor.gnbtrades.feature.products.data.models.RateResponse
+import com.oriolpastor.gnbtrades.feature.products.data.models.TransactionResponse
 import retrofit2.http.GET
 
 interface ApiService {

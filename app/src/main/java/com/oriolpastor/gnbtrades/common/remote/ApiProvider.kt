@@ -8,14 +8,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object ApiProvider : KoinComponent {
-    private val config: ConfigurationProvider by inject()
 
     fun provideApi(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
     fun provideRetrofit(
         moshiConverterFactory: MoshiConverterFactory
     ): Retrofit = Retrofit.Builder()
-        .baseUrl(config.baseUrl)
+        .baseUrl("https://quiet-stone-2094.herokuapp.com/")
         .addConverterFactory(moshiConverterFactory)
         .build()
 

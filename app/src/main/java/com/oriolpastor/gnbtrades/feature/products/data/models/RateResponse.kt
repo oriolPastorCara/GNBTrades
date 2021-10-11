@@ -1,4 +1,4 @@
-package com.oriolpastor.gnbtrades.feature.splashScreen.data.models
+package com.oriolpastor.gnbtrades.feature.products.data.models
 
 import com.squareup.moshi.Json
 

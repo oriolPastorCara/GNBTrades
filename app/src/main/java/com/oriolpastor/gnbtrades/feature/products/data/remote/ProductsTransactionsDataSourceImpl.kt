@@ -1,22 +1,22 @@
-package com.oriolpastor.gnbtrades.feature.splashScreen.data
+package com.oriolpastor.gnbtrades.feature.products.data.remote
 
 import android.accounts.NetworkErrorException
 import com.oriolpastor.gnbtrades.base.domain.GenericErrors
 import com.oriolpastor.gnbtrades.common.MyResult
+import com.oriolpastor.gnbtrades.common.local.entities.Product
+import com.oriolpastor.gnbtrades.common.local.entities.Rate
 import com.oriolpastor.gnbtrades.common.remote.ApiService
-import com.oriolpastor.gnbtrades.feature.splashScreen.data.models.RateResponse
-import com.oriolpastor.gnbtrades.feature.splashScreen.domain.TransactionData
-import com.oriolpastor.gnbtrades.feature.splashScreen.domain.TransactionsDataSource
+import com.oriolpastor.gnbtrades.feature.products.data.models.RateResponse
+import com.oriolpastor.gnbtrades.feature.products.domain.remote.ProductsTransactionsDataSource
 import java.lang.Exception
 
-class TransactionsDataSourceImpl(private val apiService: ApiService) : TransactionsDataSource {
-    override suspend fun getRatesList(): MyResult<List<RateResponse>, GenericErrors> =
-        apiService.execute { getRates() }
+class ProductsTransactionsDataSourceImpl(private val apiService: ApiService) : ProductsTransactionsDataSource {
+    override suspend fun getRatesList(): MyResult<List<Rate>, GenericErrors> =
+        apiService.execute { getRates().mapToDomain() }
 
     override suspend fun getTransactionsList():
-            MyResult<Map<String, List<TransactionData>>, GenericErrors> =
+            MyResult<List<Product>, GenericErrors> =
         apiService.execute { getTransactions().mapToDomain() }
-
 
     private suspend fun <T> ApiService.execute(body: suspend ApiService.() -> T):
             MyResult<T, GenericErrors> =

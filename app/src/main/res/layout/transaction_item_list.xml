@@ -17,18 +17,12 @@
             android:paddingHorizontal="@dimen/generic_small_padding">
 
             <TextView
-                android:id="@+id/product_list_item_title"
+                android:id="@+id/transaction_list_item_amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="16sp"
-                tools:text="title" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_chevron_right" />
-
+                tools:text="2.000€" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

@@ -4,7 +4,6 @@ package com.oriolpastor.gnbtrades.feature.products.ui
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oriolpastor.gnbtrades.R
 import com.oriolpastor.gnbtrades.base.ui.BaseFragment
-import com.oriolpastor.gnbtrades.common.livecycle.observe
 import com.oriolpastor.gnbtrades.databinding.ProductsFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -14,15 +13,15 @@ class ProductsFragment :
     override val layoutRes: Int = R.layout.products_fragment
     override val viewModel: ProductsViewModel by viewModel()
 
-    lateinit var productsAdapter: ProductsListAdapter
+    private lateinit var productsAdapter: ProductsListAdapter
 
     override fun init(binding: ProductsFragmentBinding) {
+        binding.viewModel = viewModel
         setupList(binding)
-
     }
 
     private fun setupList(binding: ProductsFragmentBinding) {
-        observe(viewModel.transactionsList) {
+        viewModel.productsList.observe(viewLifecycleOwner, {
             if (binding.transactionsList.adapter == null) {
                 val linearLayoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -36,7 +35,7 @@ class ProductsFragment :
                 productsAdapter.updateList(it)
                 productsAdapter.notifyDataSetChanged()
             }
-        }
+        })
     }
 
     private fun onListClick(product: String) {
