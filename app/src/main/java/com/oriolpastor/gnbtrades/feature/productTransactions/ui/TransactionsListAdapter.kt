@@ -5,22 +5,23 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.oriolpastor.gnbtrades.R
-import com.oriolpastor.gnbtrades.databinding.ProductsItemListBinding
 import com.oriolpastor.gnbtrades.databinding.TransactionItemListBinding
-import com.oriolpastor.gnbtrades.feature.products.domain.remote.models.TransactionData
-import com.oriolpastor.gnbtrades.feature.products.ui.ProductsListAdapter
+import java.math.BigDecimal
 
 class TransactionsListAdapter(
-    private var transactionsList: List<Float>
+    private var transactionsList: List<BigDecimal>
 ) : RecyclerView.Adapter<TransactionsListAdapter.ViewHolder>() {
 
     inner class ViewHolder(
         private val binding: TransactionItemListBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(amount: Float) {
-            binding.transactionListItemAmount.text = amount.toString()
-
+        fun bind(amount: BigDecimal) {
+            binding.transactionListItemAmount.text =
+                binding.transactionListItemAmount.context.getString(
+                    R.string.euro_currency,
+                    amount
+                )
         }
     }
 
@@ -43,7 +44,7 @@ class TransactionsListAdapter(
 
     override fun getItemCount() = transactionsList.size
 
-    fun updateList(transactionsList: List<Float>) {
+    fun updateList(transactionsList: List<BigDecimal>) {
         this.transactionsList = transactionsList
     }
 }

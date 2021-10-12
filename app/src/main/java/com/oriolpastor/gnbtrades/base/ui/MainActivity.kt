@@ -1,7 +1,7 @@
 package com.oriolpastor.gnbtrades.base.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import com.oriolpastor.gnbtrades.R
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         navigator.directions.observe(this, { direction ->
-            when(direction) {
+            when (direction) {
                 is Route.Forward -> navigateTo(direction.direction)
                 else -> navigateBack()
             }

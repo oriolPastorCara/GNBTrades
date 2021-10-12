@@ -6,9 +6,9 @@ import com.oriolpastor.gnbtrades.feature.products.domain.local.LocalRatesDataSou
 
 class LocalRatesDataSourceImpl(
     private val room: AppDatabase
-) : LocalRatesDataSource{
+) : LocalRatesDataSource {
     override suspend fun saveRatesList(data: List<Rate>) =
-        room.ratesDao().insertAll(data)
+        room.ratesDao().replaceAll(data)
 
     override suspend fun getRatesList(): List<Rate> =
         room.ratesDao().getRates()

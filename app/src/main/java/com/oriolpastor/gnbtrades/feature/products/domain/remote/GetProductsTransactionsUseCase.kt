@@ -8,5 +8,5 @@ import com.oriolpastor.gnbtrades.common.local.entities.Product
 class GetProductsTransactionsUseCase(private val productsTransactionsDataSource: ProductsTransactionsDataSource) :
     UseCase<Unit, MyResult<List<Product>, GenericErrors>> {
     override suspend fun invoke(params: Unit):
-            MyResult<List<Product>, GenericErrors> = productsTransactionsDataSource.getTransactionsList()
+        MyResult<List<Product>, GenericErrors> = productsTransactionsDataSource.getTransactionsList()
 }

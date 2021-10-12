@@ -5,10 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.oriolpastor.gnbtrades.R
 import com.oriolpastor.gnbtrades.base.ui.BaseFragment
 import com.oriolpastor.gnbtrades.databinding.ProductDetailFragmentBinding
-import com.oriolpastor.gnbtrades.feature.products.ui.ProductsListAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import java.util.*
+import java.util.Locale
 
 class ProductDetailFragment :
     BaseFragment<ProductDetailFragmentBinding, ProductDetailViewModel>() {
@@ -40,6 +39,13 @@ class ProductDetailFragment :
                 transactionsListAdapter.updateList(it)
                 transactionsListAdapter.notifyDataSetChanged()
             }
+        })
+        viewModel.totalSumOfTransactions.observe(viewLifecycleOwner, {
+            binding.productDetailTotalTransactionsAmount.text =
+                binding.productDetailTotalTransactionsAmount.context.getString(
+                    R.string.total_transactions_amount,
+                    it
+                )
         })
     }
 }

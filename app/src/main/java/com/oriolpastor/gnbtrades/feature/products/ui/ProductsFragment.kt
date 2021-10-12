@@ -1,6 +1,5 @@
 package com.oriolpastor.gnbtrades.feature.products.ui
 
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oriolpastor.gnbtrades.R
 import com.oriolpastor.gnbtrades.base.ui.BaseFragment

@@ -1,6 +1,12 @@
 package com.oriolpastor.gnbtrades.feature.products.ui
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.oriolpastor.gnbtrades.base.ui.navigation.Navigator
 import com.oriolpastor.gnbtrades.common.local.entities.Product
 import com.oriolpastor.gnbtrades.common.local.entities.Rate
@@ -8,8 +14,8 @@ import com.oriolpastor.gnbtrades.common.onError
 import com.oriolpastor.gnbtrades.common.onSuccess
 import com.oriolpastor.gnbtrades.feature.products.domain.local.SaveProductsUseCase
 import com.oriolpastor.gnbtrades.feature.products.domain.local.SaveRatesUseCase
-import com.oriolpastor.gnbtrades.feature.products.domain.remote.GetRatesUseCase
 import com.oriolpastor.gnbtrades.feature.products.domain.remote.GetProductsTransactionsUseCase
+import com.oriolpastor.gnbtrades.feature.products.domain.remote.GetRatesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -26,7 +32,6 @@ class ProductsViewModel(
     private val _productsList = MutableLiveData<List<Product>>()
     val productsList: LiveData<List<String>> =
         _productsList.map { it.map { data -> data.sku } }
-
 
     private val _isLoadingProducts = MutableLiveData(true)
     private val _isLoadingRates = MutableLiveData(true)

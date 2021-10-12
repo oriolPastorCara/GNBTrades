@@ -3,6 +3,8 @@
 
     <string name="select_product_transactions">Select product</string>
     <string name="product_id_transactions">%s transactions</string>
+    <string name="euro_currency" translatable="false">%.2f €</string>
+    <string name="total_transactions_amount">Total: %.2f €</string>
     <string name="connetion_error">Check your internet connection</string>
     <string name="generic_error">An Error has occurred</string>
 </resources>

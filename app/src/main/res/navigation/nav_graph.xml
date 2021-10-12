@@ -6,16 +6,6 @@
     app:startDestination="@id/productsFragment">
 
     <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.oriolpastor.gnbtrades.feature.splashScreen.ui.SplashFragment"
-        tools:layout="@layout/splash_fragment">
-        <action
-            android:id="@+id/navigate_from_splash_to_products"
-            app:destination="@id/productsFragment"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
         android:id="@+id/productsFragment"
         android:name="com.oriolpastor.gnbtrades.feature.products.ui.ProductsFragment"
         tools:layout="@layout/products_fragment">

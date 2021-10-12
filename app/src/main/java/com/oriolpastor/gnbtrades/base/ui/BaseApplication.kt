@@ -6,7 +6,6 @@ import com.oriolpastor.gnbtrades.common.remote.apiModule
 import com.oriolpastor.gnbtrades.di.appModule
 import com.oriolpastor.gnbtrades.feature.productTransactions.transactionDetailModule
 import com.oriolpastor.gnbtrades.feature.products.productsModule
-import com.oriolpastor.gnbtrades.feature.splashScreen.splashModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
@@ -29,7 +28,6 @@ class BaseApplication : Application() {
                     apiModule,
                     productsModule,
                     transactionDetailModule,
-                    splashModule,
                 )
             )
         }

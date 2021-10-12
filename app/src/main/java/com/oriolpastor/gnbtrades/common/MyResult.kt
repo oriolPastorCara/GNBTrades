@@ -5,14 +5,14 @@ sealed class MyResult<out S, out E> {
     data class Error<out E>(val error: E) : MyResult<Nothing, E>()
 }
 
-inline infix fun <S, E> MyResult<S, E>.onSuccess(action: (S) -> Unit): MyResult<S,E> {
+inline infix fun <S, E> MyResult<S, E>.onSuccess(action: (S) -> Unit): MyResult<S, E> {
     if (this is MyResult.Success) {
         action(value)
     }
     return this
 }
 
-inline infix fun <S, E> MyResult<S, E>.onError(action: (E) -> Unit): MyResult<S,E> {
+inline infix fun <S, E> MyResult<S, E>.onError(action: (E) -> Unit): MyResult<S, E> {
     if (this is MyResult.Error) {
         action(error)
     }

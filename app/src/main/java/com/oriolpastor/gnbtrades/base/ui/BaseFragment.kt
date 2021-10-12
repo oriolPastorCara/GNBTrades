@@ -9,7 +9,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 
-abstract class BaseFragment<Binding: ViewDataBinding, VM : ViewModel> : Fragment() {
+abstract class BaseFragment<Binding : ViewDataBinding, VM : ViewModel> : Fragment() {
 
     abstract val layoutRes: Int
     protected abstract val viewModel: VM

@@ -4,6 +4,7 @@
         <item name="android:textSize">@dimen/title_text_size</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:paddingStart">@dimen/generic_horizontal_padding</item>
+        <item name="android:paddingEnd">@dimen/generic_horizontal_padding</item>
         <item name="android:paddingBottom">@dimen/generic_small_padding</item>
         <item name="android:paddingTop">@dimen/generic_small_padding</item>
         <item name="android:textStyle">bold</item>

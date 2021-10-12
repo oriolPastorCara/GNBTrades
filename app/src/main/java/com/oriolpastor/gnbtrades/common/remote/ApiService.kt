@@ -5,9 +5,9 @@ import com.oriolpastor.gnbtrades.feature.products.data.models.TransactionRespons
 import retrofit2.http.GET
 
 interface ApiService {
-        @GET("/rates.json")
-        suspend fun getRates(): List<RateResponse>
+    @GET("/rates.json")
+    suspend fun getRates(): List<RateResponse>
 
-        @GET("/transactions.json")
-        suspend fun getTransactions(): List<TransactionResponse>
+    @GET("/transactions.json")
+    suspend fun getTransactions(): List<TransactionResponse>
 }
