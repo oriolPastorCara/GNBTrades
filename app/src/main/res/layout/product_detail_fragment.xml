@@ -33,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:paddingHorizontal="@dimen/generic_horizontal_padding"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/product_detail_title_divider"
             app:layout_constraintBottom_toTopOf="@id/product_detail_total_amount_divider"
             tools:listitem="@layout/transaction_item_list"

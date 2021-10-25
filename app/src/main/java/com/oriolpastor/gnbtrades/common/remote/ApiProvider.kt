@@ -26,7 +26,6 @@ object ApiProvider : KoinComponent {
             .addInterceptor(HttpLoggingInterceptor())
             .addInterceptor(RequestInterceptor())
             .build()
-
     }
 
     fun provideMoshiConverter(): MoshiConverterFactory = MoshiConverterFactory.create(

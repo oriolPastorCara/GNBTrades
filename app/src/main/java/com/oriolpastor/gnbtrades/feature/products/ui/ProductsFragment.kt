@@ -1,6 +1,5 @@
 package com.oriolpastor.gnbtrades.feature.products.ui
 
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.oriolpastor.gnbtrades.R
 import com.oriolpastor.gnbtrades.base.ui.BaseFragment
 import com.oriolpastor.gnbtrades.databinding.ProductsFragmentBinding
@@ -22,9 +21,6 @@ class ProductsFragment :
     private fun setupList(binding: ProductsFragmentBinding) {
         viewModel.productsList.observe(viewLifecycleOwner, {
             if (binding.transactionsList.adapter == null) {
-                val linearLayoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                binding.transactionsList.layoutManager = linearLayoutManager
                 productsAdapter = ProductsListAdapter(
                     it,
                     ::onListClick,

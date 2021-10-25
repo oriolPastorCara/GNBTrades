@@ -16,6 +16,7 @@ import com.oriolpastor.gnbtrades.feature.products.domain.local.SaveProductsUseCa
 import com.oriolpastor.gnbtrades.feature.products.domain.local.SaveRatesUseCase
 import com.oriolpastor.gnbtrades.feature.products.domain.remote.GetProductsTransactionsUseCase
 import com.oriolpastor.gnbtrades.feature.products.domain.remote.GetRatesUseCase
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -27,6 +28,7 @@ class ProductsViewModel(
     private val getProductsTransactionsUseCase: GetProductsTransactionsUseCase,
     private val saveProductsUseCase: SaveProductsUseCase,
     private val saveRatesUseCase: SaveRatesUseCase,
+    private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default
 ) : ViewModel() {
 
     private val _productsList = MutableLiveData<List<Product>>()
@@ -48,7 +50,7 @@ class ProductsViewModel(
 
     private fun getRatesList() {
         viewModelScope.launch {
-            withContext(Dispatchers.Default) {
+            withContext(coroutineDispatcher) {
                 getRatesUseCase.invoke(Unit)
             }.onSuccess {
                 _isLoadingRates.postValue(false)
@@ -61,7 +63,7 @@ class ProductsViewModel(
 
     private fun getTransactionsList() {
         viewModelScope.launch {
-            withContext(Dispatchers.Default) {
+            withContext(coroutineDispatcher) {
                 getProductsTransactionsUseCase.invoke(Unit)
             }.onSuccess {
                 _productsList.postValue(it)
@@ -75,7 +77,7 @@ class ProductsViewModel(
 
     private fun saveProductsToDB(products: List<Product>) {
         viewModelScope.launch {
-            withContext(Dispatchers.Default) {
+            withContext(coroutineDispatcher) {
                 saveProductsUseCase.invoke(products)
             }
         }
@@ -83,7 +85,7 @@ class ProductsViewModel(
 
     private fun saveRatesToDB(rates: List<Rate>) {
         viewModelScope.launch {
-            withContext(Dispatchers.Default) {
+            withContext(coroutineDispatcher) {
                 saveRatesUseCase.invoke(rates)
             }
         }
